@@ -61,3 +61,4 @@ buck-out/
 # microsoft app center
 
 appcenter-config.json
+*.log
