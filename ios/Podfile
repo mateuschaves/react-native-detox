@@ -12,6 +12,12 @@ target 'animated' do
     :hermes_enabled => false
   )
 
+  pod 'appcenter-analytics', :path => '../node_modules/appcenter-analytics'
+
+  pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes'
+
+  pod 'appcenter-core', :path => '../node_modules/appcenter'
+
   target 'animatedTests' do
     inherit! :complete
     # Pods for testing
