@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Make gradlew executable
-        run: cd .. && cd android && chmod +x ./gradlew
+        run:  chmod +x ./gradlew
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Build the app
-        run: cd .. && cd android && ./gradlew build
+        run:  ./gradlew build
