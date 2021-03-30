@@ -1,12 +1,38 @@
-name: Build
-on: [pull_request, push]
+name: ci
+on: [pull_request]
+
 jobs:
-  build:
+  install-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Make gradlew executable
-        run:  cd .. && cd .. && cd android && chmod +x ./gradlew
-      - name: Checkout the code
+      - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Build the app
-        run:  ./gradlew build
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Linting
+        run: yarn lint
+
+  build-android:
+    needs: install-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build Android Release
+        run: cd android && ./gradlew assembleRelease
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
