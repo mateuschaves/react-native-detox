@@ -1,3 +1,4 @@
+  
 name: ci
 on: [pull_request]
 
@@ -36,3 +37,26 @@ jobs:
         with:
           name: app-release.apk
           path: android/app/build/outputs/apk/release/
+
+  # build-ios:
+  #   needs: install-and-test
+  #   runs-on: [self-hosted, macos]
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Install dependencies
+  #       run: yarn install
+
+  #     - name: Install POD dependencies
+  #       run: cd ios && pod install
+
+  #     - name: Build app
+  #       run: |
+  #         xcodebuild -workspace cepapp.xcworkspace -scheme cepapp archive -archivePath cepapp.xcarchive -allowProvisioningUpdates
+  #         xcodebuild -exportArchive -archivePath ./cepapp.xcarchive -exportPath . -exportOptionsPlist cepapp/Info.plist
+  #         mv cepapp.ipa ../cepapp.ipa
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: cepapp.ipa
+  #         path: ios/build/
