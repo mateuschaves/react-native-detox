@@ -17,9 +17,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Linting
-        run: yarn lint
-
   build-android:
     needs: install-and-test
     runs-on: ubuntu-latest
